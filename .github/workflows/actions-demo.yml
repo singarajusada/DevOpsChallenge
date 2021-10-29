@@ -80,7 +80,7 @@ jobs:
         
   job5:
     name: Job 5
-    needs: job4
+    needs: job
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
