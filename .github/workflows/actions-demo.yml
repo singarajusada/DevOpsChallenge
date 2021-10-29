@@ -35,6 +35,7 @@ jobs:
           java-version: '11'
           distribution: adopt
           architecture: x64
+       - name: Build with Maven
          run: mvn clean install --batch-mode
 
   job3:
