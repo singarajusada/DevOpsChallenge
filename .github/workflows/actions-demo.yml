@@ -73,14 +73,13 @@ jobs:
         - uses: actions/checkout@main
         - name: Get the version
           id: get_version
-          run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-          pre: echo ::save-state name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+          run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV       
         - name: Create a Release
           uses: elgohr/Github-Release-Action@main
           env:
             GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           with:
-           args: "${{ env.STATE_RELEASE_VERSION }}"
+           args: ${{ env.TAG }}
         
   job5:
     name: Job 5
