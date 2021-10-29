@@ -8,12 +8,20 @@ jobs:
   job1:
     name: Job 1
     runs-on: ubuntu-latest
-
     steps:
-    - name: Sleep and Run
-      run: |
-        echo "Sleeping for 10"
-        sleep 10
+      - uses: actions/checkout@v2
+        with:
+           fetch-depth: '0'
+      - name: Bump version and push tag
+        id: tag_version
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DRY_RUN: true
+      - name: Show new tag
+        run: |
+             echo " ${{ steps.tag_version.outputs.new_tag }}" 
 
   job2:
     name: Job 2
