@@ -57,6 +57,9 @@ jobs:
             distribution: adopt
         - name: Publish package
           run: |
+            ls -ll
+            pwd    
+            cd springbootproject/
             mvn versions:set -DnewVersion=${{ steps.tag_version.outputs.new_tag
             }}
             mvn --batch-mode deploy
@@ -65,7 +68,7 @@ jobs:
         
   job4:
     name: Job 4
-    needs: job2
+    needs: job3
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@main
@@ -78,7 +81,7 @@ jobs:
         
   job5:
     name: Job 5
-    needs: job2
+    needs: job4
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
