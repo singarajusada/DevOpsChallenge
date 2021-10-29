@@ -1,24 +1,21 @@
-name: build
+name: Bump version
 on:
   push:
     branches:
       - main
 jobs:
-  job1:
-    name: Determine the next tag version
-    gettag:
-       runs-on: ubuntu-latest
-       steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: '0'
-        - name: Bump version and push tag
-          id: tag_version
-          uses: anothrNick/github-tag-action@1.36.0
-          env:
-            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-            WITH_V: true
-            DRY_RUN: true
-        - name: Show new tag
-          run: |
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DRY_RUN: true
+    - name: Show new tag
+      run: |
             echo " ${{ steps.tag_version.outputs.new_tag }}"
