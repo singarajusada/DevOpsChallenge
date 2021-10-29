@@ -57,8 +57,7 @@ jobs:
             distribution: adopt
         - name: Publish package
           run: |
-            ls -ll
-            pwd    
+            ls -ll   
             cd springbootproject/
             mvn versions:set -DnewVersion=${{ steps.tag_version.outputs.new_tag
             }}
