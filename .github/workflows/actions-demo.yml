@@ -71,12 +71,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@main
+        - name: Get the version
+          id: get_version
+          run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         - name: Create a Release
           uses: elgohr/Github-Release-Action@main
           env:
             GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           with:
-           args: "${{ steps.tag_version.outputs.new_tag}}"
+           args: ${{ steps.get_version.outputs.VERSION }}
         
   job5:
     name: Job 5
