@@ -76,11 +76,11 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           with:
-           args: MyReleaseMessage
+           args: ${{ steps.tag_version.outputs.new_tag}}
         
   job5:
     name: Job 5
-    needs: job3
+    needs: job4
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
