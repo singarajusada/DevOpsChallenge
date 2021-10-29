@@ -73,7 +73,7 @@ jobs:
         - uses: actions/checkout@main
         - name: Get the version
           id: get_version
-          run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+          run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
         - name: Create a Release
           uses: elgohr/Github-Release-Action@main
           env:
